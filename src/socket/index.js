@@ -1,4 +1,5 @@
 const io = require('socket.io-client')
+const { START_BOT } = require('../events')
 
 class SocketClient {
   constructor ({ config, serverConfig, commands, options }) {
@@ -6,17 +7,16 @@ class SocketClient {
     this.commands = commands
     this.initSocket(config, serverConfig, options)
     for (const event in commands.on) {
-      console.log('event: ', event)
-      const { eventName, cb } = commands.on[event]
-      this.socket.on(eventName, cb)
+      const { cb } = commands.on[event]
+      this.socket.on(event, cb)
     }
   }
 
   initSocket (config, serverConfig, options = { query: 'type-bot' }) {
     this.socket = io(`${config.baseUrl}:${serverConfig.webSocketsPort}`, options)
     this.socket.on('connect', (msg) => {
-      const { eventName, options, cb } = this.commands.emit.startBot
-      this.socket.emit(eventName, options, cb)
+      const { options, cb } = this.commands.emit[START_BOT]
+      this.socket.emit(START_BOT, options, cb)
     })
   }
 }
