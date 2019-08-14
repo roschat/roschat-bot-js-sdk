@@ -1,5 +1,5 @@
-const RoschatBot = require('./src/index')
-const events = require('./src/events')
+const RoschatBot = require('./lib/index')
+const events = require('./lib/events')
 
 module.exports = {
   RoschatBot,
