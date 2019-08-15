@@ -77,8 +77,8 @@ https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message
 #### `setBotKeyBoard({cid, keyboard[, action]})`
 Установить клавиатуру в чате с пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-set-bot-keyboard))
 
-#### `start([options]): new Promise`
-Вызов для получения конфигурации сервера и инициализации бота 
+#### `start(): new Promise`
+Вызывается для получения конфигурации сервера и инициализации бота 
 
 
 ## Пример бота
