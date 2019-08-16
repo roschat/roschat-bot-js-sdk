@@ -59,39 +59,40 @@ bot.emit('send-bot-message', {cid: 100, data: 'Тестовое сообщени
 
 ## Методы RoschatBot
 ### Инициализация:
-`start(): new Promise`
+__`start(): new Promise`__
 
 Инициализировать работу бота 
 
 ### Работа с сообщениями
-`on(BOT_MESSAGE_EVENT, function)`
+__`on(BOT_MESSAGE_EVENT, function)`__
 
 Событие `bot-message-event` - Уведомление о новом сообщении от пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message))
 
-`sendMessage({data, cid[, cidType, dataType,  dataFile, replyId]}[, callback])`
+
+__`sendMessage({data, cid[, cidType, dataType,  dataFile, replyId]}[, callback])`__
 
 Отправить сообщения пользователю ([описание](
 https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message
 ))
 
-`sendMessageReceived({id}[, callback])`
+__`sendMessageReceived({id}[, callback])`__
 
 Сообщить о получении сообщения пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-received))
 
-`sendMessageWatched({id}[, callback])`
+__`sendMessageWatched({id}[, callback])`__
 
 Сообщить о просмотре сообщения пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-watched))
 
-`deleteBotMessage({id}[, callback])`
+__`deleteBotMessage({id}[, callback])`__
 
 Удалить сообщение в чате ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-delete-bot-message))
 
 ### Работа с клавиатурой
-`on(BOT_BUTTON_EVENT, function)`
+__`on(BOT_BUTTON_EVENT, function)`__
 
 Событие `bot-button-event` - нажатие кнопки пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-button-event))
 
-`setBotKeyBoard({cid, keyboard[, action]})`
+__`setBotKeyBoard({cid, keyboard[, action]})`__
 
 Установить клавиатуру в чате с пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-set-bot-keyboard))
 
