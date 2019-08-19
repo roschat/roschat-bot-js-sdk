@@ -1,5 +1,5 @@
 # roschat-bot
-JavaScript SDK для написания ботов для сервера РОСЧАТ.
+JavaScript SDK для написания ботов для сервера РОСЧАТ. [Описание протокола](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api) ботов.
 
 ## Установка
 Склонируйте git репозиторий
