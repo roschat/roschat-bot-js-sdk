@@ -69,7 +69,7 @@ __`on(BOT_MESSAGE_EVENT, function)`__
 Событие `bot-message-event` - Уведомление о новом сообщении от пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message))
 
 
-__`sendMessage({data, cid[, cidType, dataType,  dataFile, replyId]}[, callback])`__
+__`sendMessage({cid[, cidType, dataType, replyId]}, data[, callback])`__
 
 Отправить сообщения пользователю ([описание](
 https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message
