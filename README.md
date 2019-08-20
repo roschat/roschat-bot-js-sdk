@@ -66,7 +66,7 @@ bot.emit('send-bot-message', {cid: 100, data: 'Тестовое сообщени
 #### `on(BOT_MESSAGE_EVENT, function)`
 Событие `bot-message-event` - Уведомление о новом сообщении от пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message))
 
-#### `sendMessage({data, cid[, cidType, dataType,  dataFile, replyId]}[, callback])`
+#### `sendMessage({cid[, cidType, dataType,  dataFile, replyId]}, data[, callback])`
 Для отправки сообщения пользователю ([описание](
 https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message
 ))
