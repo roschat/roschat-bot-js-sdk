@@ -92,7 +92,7 @@ __`on(BOT_BUTTON_EVENT, function)`__
 
 Событие `bot-button-event` - нажатие кнопки пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-button-event))
 
-__`setBotKeyBoard({cid, keyboard[, action]})`__
+__`setBotKeyboard({cid, keyboard[, action]})`__
 
 Установить клавиатуру в чате с пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-set-bot-keyboard))
 
