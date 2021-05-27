@@ -1,16 +1,16 @@
-# roschat-bot
+# roschat-bot-js-sdk
 JavaScript SDK для написания ботов для сервера РОСЧАТ. [Описание протокола](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api) ботов.
 
 ## Установка
-Склонируйте git репозиторий
+Установите с помощью NPM
+```
+npm install roschat-bot-js-sdk --save
+```
+или склонируйте git репозиторий
 ```
 git clone https://github.com/roschat/roschat-bot-js-sdk
 cd roschat-bot-js-sdk
 npm install
-```
-Или установите с помощью NPM
-```
-npm install roschat-bot --save
 ```
 
 
@@ -22,18 +22,16 @@ const { RoschatBot } = require('roschat-bot')
 // const { RoschatBot } = require('../index')
 
 const bot = new RoschatBot({
-  config: {
-    token: 'YOUR_BOT_TOKEN', // сгенерированый уникальный токен
-    name: 'YOUR_BOT_NAME', // название бота
-    baseUrl: 'https://example.com' // адрес сервера РОСЧАТ
-  }
+  token: 'YOUR_BOT_TOKEN', // сгенерированый уникальный токен
+  name: 'YOUR_BOT_NAME', // название бота
+  baseUrl: 'https://example.com' // адрес сервера РОСЧАТ
 })
 ```
 
-Для начала прослушивания событий используйте `bot.start()`
-```js
+Для инициализации и запуска бота используйте `bot.start()`
+```javascript
 bot.start()
-  .then(res => {
+  .then(_ => {
     // Обработчики событий сервера
   })
   .catch(error => {
@@ -41,16 +39,22 @@ bot.start()
   })
 ```
 
-## Пример API
+## Простой пример
 Обработка входящего события от сервера
 ```js
 const { BOT_MESSAGE_EVENT, RoschatBot } = require('roschat-bot')
-// ...
-bot.on(BOT_MESSAGE_EVENT, (res) => {
-  // Обработчики сообщения от пользователя
-})
+
+try {
+  await bot.start()
+  bot.on(BOT_MESSAGE_EVENT, (res) => {
+    console.log('Получено сообщение: ', res.id, res.cid, res.data)
+  })
+} catch (err) {
+  console.log(err)
+}
 ```
-Событие "отправить сообщение"
+
+Запрос "бот -> сервер" "отправить сообщение"
 ```js
 bot.sendMessage({cid: 100}, 'Тестовое сообщение', callbackFunc)
 // тоже самое что
@@ -59,43 +63,60 @@ bot.emit('send-bot-message', {cid: 100, data: 'Тестовое сообщени
 
 ## Методы RoschatBot
 ### Инициализация:
+Инициализировать работу бота
+
 __`start(): new Promise`__
 
-Инициализировать работу бота 
 
 ### Работа с сообщениями
+**Событие `bot-message-event`**
+
+Уведомление о новом сообщении от пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message))
+
 __`on(BOT_MESSAGE_EVENT, function)`__
 
-Событие `bot-message-event` - Уведомление о новом сообщении от пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message))
 
+**Запрос `send-bot-message`**
+
+Отправить сообщения пользователю ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message
+))
 
 __`sendMessage({cid[, cidType, dataType, replyId]}, data[, callback])`__
 
-Отправить сообщения пользователю ([описание](
-https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message
-))
 
-__`sendMessageReceived({id}[, callback])`__
+**Запрос `bot-message-received`**
 
 Сообщить о получении сообщения пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-received))
 
-__`sendMessageWatched({id}[, callback])`__
+__`sendMessageReceived({id}[, callback])`__
+
+
+**Запрос `bot-message-watched`**
 
 Сообщить о просмотре сообщения пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-watched))
 
-__`deleteBotMessage({id}[, callback])`__
+__`sendMessageWatched({id}[, callback])`__
+
+
+
+**Запрос `delete-bot-message`**
 
 Удалить сообщение в чате ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-delete-bot-message))
 
+__`deleteBotMessage({id}[, callback])`__
+
 ### Работа с клавиатурой
+**Событие `bot-button-event`**
+
+Нажатие кнопки пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-button-event))
+
 __`on(BOT_BUTTON_EVENT, function)`__
 
-Событие `bot-button-event` - нажатие кнопки пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-button-event))
-
-__`setBotKeyboard({cid, keyboard[, action]})`__
+**Запрос `set-bot-keyboard`**
 
 Установить клавиатуру в чате с пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-set-bot-keyboard))
 
+__`setBotKeyboard({cid, keyboard[, action]})`__
 
 ## Пример бота
 В папке [`example`](https://github.com/roschat/roschat-bot-js-sdk/tree/master/example) можно найти реализацию бота для сервера РОСЧАТ с использованием данного SDK. 

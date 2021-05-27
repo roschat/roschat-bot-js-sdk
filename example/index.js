@@ -4,7 +4,7 @@ const config = require('./config')
 const bot = new RoschatBot({ config })
 
 bot.start()
-  .then(res => {
+  .then(_ => {
     console.log('Бот успешно инициализирован')
     bot.on(BOT_MESSAGE_EVENT, (res) => {
       const { cid, data, dataType, id } = res
