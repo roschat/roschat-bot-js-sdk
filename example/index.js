@@ -1,7 +1,7 @@
 const { RoschatBot, BOT_MESSAGE_EVENT, BOT_BUTTON_EVENT } = require('../index')
 const config = require('./config')
 
-const bot = new RoschatBot({ config })
+const bot = new RoschatBot(config)
 
 bot.start()
   .then(_ => {

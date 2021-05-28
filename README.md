@@ -1,5 +1,5 @@
 # roschat-bot-js-sdk
-JavaScript SDK для написания ботов для сервера РОСЧАТ. [Описание протокола](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api) ботов.
+JavaScript SDK для написания ботов для сервера РОСЧАТ. [Описание протокола ботов](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api).
 
 ## Установка
 Установите с помощью NPM
@@ -56,67 +56,131 @@ try {
 
 Запрос "бот -> сервер" "отправить сообщение"
 ```js
-bot.sendMessage({cid: 100}, 'Тестовое сообщение', callbackFunc)
+const cb = (res) => console.log(res)
+bot.sendMessage({cid: 100}, 'Тестовое сообщение', cb)
 // тоже самое что
-bot.emit('send-bot-message', {cid: 100, data: 'Тестовое сообщение'}, callbackFunc)
+bot.emit('send-bot-message', {cid: 100, data: 'Тестовое сообщение'}, cb)
 ```
 
 ## Методы RoschatBot
-### Инициализация:
+### Открытие сессии:
 Инициализировать работу бота
 
 __`start(): new Promise`__
 
 
-### Работа с сообщениями
-**Событие `bot-message-event`**
+### Обмен сообщениями
+**Событие [bot-message-event](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message)**
 
-Уведомление о новом сообщении от пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message))
+Уведомление о новом сообщении от пользователя
 
 __`on(BOT_MESSAGE_EVENT, function)`__
 
 
-**Запрос `send-bot-message`**
+**Запрос [send-bot-message](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message)**
 
-Отправить сообщения пользователю ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message
-))
+Отправить сообщения пользователю
 
-__`sendMessage({cid[, cidType, dataType, replyId]}, data[, callback])`__
-
-
-**Запрос `bot-message-received`**
-
-Сообщить о получении сообщения пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-received))
-
-__`sendMessageReceived({id}[, callback])`__
+__`sendMessage({cid, [cidType, dataType, replyId]}, data, callback)`__
 
 
-**Запрос `bot-message-watched`**
+**Запрос [bot-message-received](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-received)**
 
-Сообщить о просмотре сообщения пользователя ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-watched))
+Сообщить о получении сообщения пользователя
 
-__`sendMessageWatched({id}[, callback])`__
+__`sendMessageReceived({id}, callback)`__
 
 
+**Запрос [bot-message-watched](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-message-watched)**
 
-**Запрос `delete-bot-message`**
+Сообщить о просмотре сообщения пользователя
 
-Удалить сообщение в чате ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-delete-bot-message))
+__`sendMessageWatched({id}, callback)`__
 
-__`deleteBotMessage({id}[, callback])`__
 
+**Запрос [delete-bot-message](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-delete-bot-message)**
+
+Удалить сообщение в чате
+
+__`deleteBotMessage({id}, callback)`__
+
+
+**Запрос [get-bot-messages](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-messages)**
+
+Запрос истории сообщений (начиная с последних записей в обратном порядке без учета удаленных сообщений).
+
+__`getBotMessages({ cid, [cidType, beginId, cound, endId] }, callback)`__
+
+
+**Запрос [get-bot-message](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-message)**
+
+Запрос сообщения.
+
+__`getBotMessage({ cid, id, [cidType] }, callback)`__
+
+
+**Запрос [get-bot-message-details](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-message-details)**
+
+Запрос деталей сообщения для группового чата.
+
+__`getBotMessageDetails({ cid, id, [cidType] }, callback)`__
+
+**Запрос [get-bot-messages-changes](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-messages-changes)**
+
+Запрос изменений истории сообщений.
+
+__`getBotMessagesChanges({ cid, [cidType, minRev, endId] }, callback)`__
+
+
+**Запрос [get-bot-messages-last-revision](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-messages-last-revision)**
+
+Запрос последней ревизии изменений сообщений.
+
+__`getBotMessagesLastRevision(callback)`__
+
+**Запрос [get-bot-messages-last-revision](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-messages-last-revision)**
+
+Запрос последней ревизии изменений сообщений.
+
+__`getBotMessagesLastRevision(callback)`__
+
+**Событие [bot-message-event](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-send-bot-message)**
+
+Уведомление о новом сообщении беседы с ботом.
+
+__`on(DELETE_BOT_CONVERSATION_EVENT, function)`__
+
+## Чаты
+**Запрос [get-bot-chats-changes](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-chats-changes)**
+
+Запрос изменений списка чатов.
+
+__`getBotChatsChanges({minRev}, callback)`__
+
+**Запрос [get-bot-messages-last-revision](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-get-bot-messages-last-revision)**
+
+Запрос последней ревизии чатов.
+
+__`getBotMessagesLastRevision(callback)`__
 ### Работа с клавиатурой
-**Событие `bot-button-event`**
+**Событие [bot-button-event](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-button-event)**
 
-Нажатие кнопки пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-button-event))
+Нажатие кнопки пользователем
 
 __`on(BOT_BUTTON_EVENT, function)`__
 
-**Запрос `set-bot-keyboard`**
+**Запрос [set-bot-keyboard](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-set-bot-keyboard)**
 
-Установить клавиатуру в чате с пользователем ([описание](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-set-bot-keyboard))
+Установить клавиатуру в чате с пользователем
 
 __`setBotKeyboard({cid, keyboard[, action]})`__
 
+### Работа со СКУД
+**Событие [bbot-get-acs-info](https://github.com/roschat/roschat-docs/wiki/roschat-bot-api-bot-get-acs-info)**
+
+Запрос ботом информации о пользователе РОСЧАТ из системы контроля и управления доступом (СКУД).
+
+__`getBotAcsInfo({cid}, callback)`__
+
 ## Пример бота
-В папке [`example`](https://github.com/roschat/roschat-bot-js-sdk/tree/master/example) можно найти реализацию бота для сервера РОСЧАТ с использованием данного SDK. 
+В папке [`example`](https://github.com/roschat/roschat-bot-js-sdk/tree/master/example) можно найти реализацию бота для сервера РОСЧАТ с использованием данного SDK.
