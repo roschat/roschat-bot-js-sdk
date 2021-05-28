@@ -1,14 +1,21 @@
 {
-  "name": "roschat-bot",
-  "type": "module",
-  "version": "1.0.0",
+  "name": "roschat-bot-js-sdk",
+  "version": "2.0.0",
   "description": "JavaScript SDK для написания ботов для сервера РОСЧАТ.",
-  "main": "index",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "node_modules/.bin/eslint ./lib ./example",
-    "lint:fix": "node_modules/.bin/eslint --fix ./lib ./example"
+    "lint": "node_modules/.bin/eslint ./lib ./example ./bot",
+    "lint:fix": "node_modules/.bin/eslint --fix ./lib ./example ./bot",
+    "tsc:build": "npx tsc",
+    "build": "rollup -c"
   },
+  "files": [
+    "lib",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/roschat/roschat-bot.git"
@@ -22,14 +29,20 @@
   "homepage": "https://github.com/roschat/roschat-bot#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "socket.io": "^2.4.0"
+    "socket.io": "^2.4.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
-    "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "@babel/eslint-parser": "^7.14.3",
+    "@types/node": "^12.20.13",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "@types/socket.io-client": "^1.4.36",
+    "eslint": "^7.27.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.3",
+    "rollup": "^2.48.0",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.2.4"
   }
 }
